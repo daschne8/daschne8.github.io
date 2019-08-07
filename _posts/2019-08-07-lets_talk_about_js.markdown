@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Lets talk about JS"
-date:       2019-08-07 20:51:06 +0000
+date:       2019-08-07 16:51:07 -0400
 permalink:  lets_talk_about_js
 ---
 
@@ -40,7 +40,7 @@ class Person {
 let carl = new Person('carl')
 console.log(carl.greeting()) // "hello carl"
 ```
-using regular functions in order to get any class variables one must use `bind` however using the arrow function the same code can be simplified to 
+using regular functions in order to get any class variables one must use `bind` however using the arrow function the same code can be simplified to.
 `class Person {
   constructor(name){
 	  this.name = name
@@ -53,6 +53,6 @@ let carl = new Person('carl')
 console.log(carl.greeting()) // "hello carl"
 `
 
-
+The `this` keyword doesn't intuitively bind like in other languages but arrow functions make the problem a lot easier.
 
 
