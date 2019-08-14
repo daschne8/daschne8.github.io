@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Redux Flow and async with Thunk"
-date:       2019-08-14 20:07:03 +0000
+date:       2019-08-14 16:07:04 -0400
 permalink:  redux_flow_and_async_with_thunk
 ---
 
@@ -63,6 +63,7 @@ the entire state will be saved, in our case it would look like this
 state = {count: 1}
 ```
 
+![sync](https://drive.google.com/open?id=1ThyVReo3rzsx2dpJIB_SF04yKPs-_BJ4)
 
 Simple enough, but what if the data we are handling is coming from an api?, what if we have to wait an unknown amount of time for another server to deliver needed data? It would be irresponsible to pause the entire program, what we need is a way to deal with an asynchronous request.
 
@@ -140,4 +141,6 @@ we would see in the console ```//a e b c```
 but the fetch request is asynchronous so the rest of our function will run first and log ```e```.  Once the fetch request recieves the response we will log ```b``` and subsequently ```c``` after processing the response as our "data" object.
 
 the second call is made after recieving and processing the response ```FETCH_COMMENTS``` passing in the comments as the ```action.payload``` which goes once again to the reducer => rootReducer => the overall state is saved allowing the app to use the data we fetched.
+
+![async](https://drive.google.com/open?id=16Skls5MtHAIw5WLArFFMJkmvmbgYMUgp)
 
