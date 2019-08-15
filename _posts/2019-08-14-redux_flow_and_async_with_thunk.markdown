@@ -5,7 +5,7 @@ date:       2019-08-14 16:07:04 -0400
 permalink:  redux_flow_and_async_with_thunk
 ---
 
-Code used in this blog can be found [here](https://github.com/daschne8/redux-flow-demo.git)
+Code used in this blog can be found [here](https://github.com/daschne8/redux-flow-demo.git), it contains a simple functional app, feel free to fork and npm install.
 
 Redux allows applications to centralize thier 'state' making persistance easier and facilitating ways to pass that state between components.  While Redux is not limited to React this blog will be talking about Redux in React.
 
