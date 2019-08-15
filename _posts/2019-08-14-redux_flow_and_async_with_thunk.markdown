@@ -20,15 +20,26 @@ Lets say we had a simple reducer with a counter that starts at 0.
 state = {count: 0}
 ```
 
+
 ### 1. the call,
 
-We want to increase the count so we will dispatch the action 
+We want to increase the count so we will dispatch an action like this 
 ```
 {type: "INCREASE_COUNT", amount: 1}
 ```
+using a simple action function and passing in the value ```1```
+```
+export const simpleAction = (amount) =>{
+  return {
+    type: 'INCREASE_COUNT', amount: amount
+  }
+}
+```
+
 
 ### 2. the reducer
 
+the reducer recieves the action, in this case the ```action.type``` is ```INCREASE_COUNT``` and the amount is ```1```, and modifies its state.
 
 ```
   export default function simpleReducer(
@@ -43,7 +54,7 @@ We want to increase the count so we will dispatch the action
 }
 ```
 
-the reducer recieves the action in this case the ```action.type``` is ```INCREASE_COUNT``` and the amount is ```1```
+
 
 ### 3. root reducer
 
@@ -58,7 +69,7 @@ const rootReducer = combineReducers({
 
 ### 4. save complete state
 
-the entire state will be saved, in our case it would look like this
+the entire state will be saved, in our case the state in the updated simpleReducer would look like this
 ```
 state = {count: 1}
 ```
@@ -68,7 +79,7 @@ state = {count: 1}
 
 Simple enough, but what if the data we are handling is coming from an api?, what if we have to wait an unknown amount of time for another server to deliver needed data? It would be irresponsible to pause the entire program, what we need is a way to deal with an asynchronous request.
 
-Introduce Redux-Thunk, in proramming "Thunks are primarily used to delay a calculation until its result is needed", redux-thunk allows us to wrap our stores dispatch method and dispatch something other than an action.
+Introduce Redux-Thunk, in programming "Thunks are primarily used to delay a calculation until its result is needed", redux-thunk allows us to wrap our stores dispatch method and dispatch something other than an action.
 
 first we have to apply the redux-thunk middleware to the store
 ```
@@ -103,7 +114,7 @@ export function fetchComments(query){
 ```
 
 now this is looking a 'bit' more complicated than the synchronous example so lets walk through it,
-there is more then one action in this code.  First the function dispatches the action ```LOADING_COMMENTS``` to the reducer(step 1) then the rest of the flow reducer to root reducer rootreducer saves the state.  This will tell us that we are still waiting for our data by setting a variable in the async reducer ```{...state, loading: true}```
+there is more then one action in this code.  Remeber the flow First the function dispatches the action ```LOADING_COMMENTS``` to the reducer then the reducer tothe  root reducer, and then root reducer saves the overall state.  This will tell us that we are still waiting for our data by setting a variable in the async reducer ```{...state, loading: true}```
 It would be a good idea to map the value to a component so it could render some kind of loading indicator. 
  
  ```
@@ -111,7 +122,7 @@ It would be a good idea to map the value to a component so it could render some 
 ```
 in the interim we are waiting for the fetch request to finish, which will depend on reddit's servers.
 
-this means that if i were to take the above code and add some logs to see wherewe are.
+this means that if we were to take the above code and add some logs to see where we are.
 
 ```
 export function fetchComments(query){
@@ -138,7 +149,7 @@ export function fetchComments(query){
   }
 }
 ```
-we would see in the console ```//a e b c```
+we would see in the console in order```//a e b c```
 ```a``` is at the begining of the function and is logged first
 but the fetch request is asynchronous so the rest of our function will run first and log ```e```.  Once the fetch request recieves the response we will log ```b``` and subsequently ```c``` after processing the response as our "data" object.
 
